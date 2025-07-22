@@ -1,9 +1,8 @@
-package user;
+package com.clothes_shop.clothes_shop.user.domain;
 
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 @Table(name = "users")
 @Entity
