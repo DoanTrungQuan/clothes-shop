@@ -1,12 +1,10 @@
-package com.clothes_shop.clothes_shop.user.service;
+package com.clothes_shop.clothes_shop.service;
 
-import com.clothes_shop.clothes_shop.exception.BadRequestException;
 import com.clothes_shop.clothes_shop.exception.NotFoundException;
-import org.hibernate.annotations.NotFound;
+import com.clothes_shop.clothes_shop.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
-import com.clothes_shop.clothes_shop.user.repository.UserRepository;
+import com.clothes_shop.clothes_shop.repository.UserRepository;
 
 @Service
 public class UserServiceImp implements UserService {
@@ -20,5 +18,9 @@ public class UserServiceImp implements UserService {
             throw new NotFoundException("User not found");
         }
         return "A";
+    }
+    @Override
+    public User createUser(User user) {
+        return userRepository.save(user);
     }
 }
