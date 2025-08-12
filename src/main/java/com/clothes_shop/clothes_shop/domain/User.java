@@ -1,4 +1,4 @@
-package com.clothes_shop.clothes_shop.user.domain;
+package com.clothes_shop.clothes_shop.domain;
 
 import jakarta.persistence.*;
 
@@ -29,7 +29,10 @@ public class User {
     @Column(name = "date_of_birth")
     private LocalDate dateOfBirth;
 
-    public User(String email, int id, String userName, String password, String address, String phoneNumber, LocalDate dateOfBirth) {
+    @Column(nullable = false)
+    private String role;
+
+    public User(String email, int id, String userName, String password, String address, String phoneNumber, LocalDate dateOfBirth, String role) {
         this.email = email;
         this.id = id;
         this.userName = userName;
@@ -37,6 +40,7 @@ public class User {
         this.address = address;
         this.phoneNumber = phoneNumber;
         this.dateOfBirth = dateOfBirth;
+        this.role = role;
     }
 
     public User() {
@@ -89,5 +93,11 @@ public class User {
 
     public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
+    }
+    public String getRole() {
+        return role;
+    }
+    public void setRole(String role) {
+        this.role = role;
     }
 }
