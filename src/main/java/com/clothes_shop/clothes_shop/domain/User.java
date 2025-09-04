@@ -1,40 +1,38 @@
 package com.clothes_shop.clothes_shop.domain;
 
+import com.clothes_shop.clothes_shop.common.ERole;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
 
 @Table(name = "users")
 @Entity
-public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+public class User extends BaseEntity{
 
-    @Column(unique = true, nullable = false, length = 50)
+    @Column(unique = true, nullable = true, length = 50)
     private String userName;
 
-    @Column(nullable = false)
+    @Column()
     private String password;
 
-    @Column(unique = true, nullable = false)
+    @Column(unique = true, nullable = true)
     private String email;
 
-    @Column()
+    @Column(nullable = true)
     private String address;
 
-    @Column(name = "phone_number", length = 50, nullable = false)
+    @Column(name = "phone_number", length = 50, nullable = true)
     private String phoneNumber;
 
-    @Column(name = "date_of_birth")
+    @Column(name = "date_of_birth", nullable = true)
     private LocalDate dateOfBirth;
 
-    @Column(nullable = false)
-    private String role;
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = true)
+    private ERole role;
 
-    public User(String email, int id, String userName, String password, String address, String phoneNumber, LocalDate dateOfBirth, String role) {
+    public User(String email, String userName, String password, String address, String phoneNumber, LocalDate dateOfBirth, ERole role) {
         this.email = email;
-        this.id = id;
         this.userName = userName;
         this.password = password;
         this.address = address;
@@ -45,14 +43,6 @@ public class User {
 
     public User() {
 
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getUserName() {
@@ -94,10 +84,16 @@ public class User {
     public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
-    public String getRole() {
+    public ERole getRole() {
         return role;
     }
-    public void setRole(String role) {
+    public void setRole(ERole role) {
         this.role = role;
+    }
+    public String getPassword() {
+        return this.password;
+    }
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
