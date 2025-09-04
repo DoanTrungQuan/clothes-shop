@@ -1,26 +1,24 @@
 package com.clothes_shop.clothes_shop.service;
 
+import com.clothes_shop.clothes_shop.dto.UserDto;
 import com.clothes_shop.clothes_shop.exception.NotFoundException;
 import com.clothes_shop.clothes_shop.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import com.clothes_shop.clothes_shop.repository.UserRepository;
+
+import java.util.List;
 
 @Service
 public class UserServiceImp implements UserService {
 
     @Autowired
-    public UserRepository userRepository;
+    private final UserRepository userRepository;
 
-    @Override
-    public String getUser(int id) {
-        if (userRepository.findById(id).isEmpty()) {
-            throw new NotFoundException("User not found");
-        }
-        return "A";
+    public UserServiceImp(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
-    @Override
-    public User createUser(User user) {
-        return userRepository.save(user);
-    }
+
 }
