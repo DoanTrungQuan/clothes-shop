@@ -21,10 +21,10 @@ public class Product extends BaseEntity {
     private String description;
 
     @Column(nullable = true)
-    private double price;
+    private Double price;
 
     @Column(nullable = true)
-    private int quantity;
+    private Integer quantity;
 
     @Column(nullable = true)
     private String urlPhoto;

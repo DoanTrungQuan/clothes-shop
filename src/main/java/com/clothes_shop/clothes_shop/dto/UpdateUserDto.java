@@ -1,13 +1,20 @@
 package com.clothes_shop.clothes_shop.dto;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.annotation.Nullable;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class UpdateUserDto {
 
     @Nullable()
@@ -29,67 +36,7 @@ public class UpdateUserDto {
     private String phoneNumber;
 
     @Nullable()
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dateOfBirth;
 
-    public UpdateUserDto(@Nullable String userName, @Nullable String password, @Nullable String email, @Nullable String address, @Nullable String phoneNumber, @Nullable LocalDate dateOfBirth) {
-        this.userName = userName;
-        this.password = password;
-        this.email = email;
-        this.address = address;
-        this.phoneNumber = phoneNumber;
-        this.dateOfBirth = dateOfBirth;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(@Nullable String userName) {
-        this.userName = userName;
-    }
-
-    @Nullable
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(@Nullable String password) {
-        this.password = password;
-    }
-
-    @Nullable
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(@Nullable String email) {
-        this.email = email;
-    }
-
-    @Nullable
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(@Nullable String address) {
-        this.address = address;
-    }
-
-    @Nullable
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(@Nullable String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    @Nullable
-    public LocalDate getDateOfBirth() {
-        return dateOfBirth;
-    }
-
-    public void setDateOfBirth(@Nullable LocalDate dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
-    }
 }

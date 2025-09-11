@@ -4,7 +4,7 @@ public enum EError {
     USER_EXISTED("User already exists"),
     USER_NOT_FOUND("User not found"),
     PRODUCT_NOT_FOUND("Product not found"),
-    PRODUCT_NOT_EXIST("Product not exists");
+    PRODUCT_EXISTED("Product already exists");
     private final String message;
 
     EError(String message) {
