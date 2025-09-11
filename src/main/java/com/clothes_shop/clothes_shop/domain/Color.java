@@ -2,9 +2,15 @@ package com.clothes_shop.clothes_shop.domain;
 
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "colors")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Color extends BaseEntity{
     @Column(nullable = true)
     private String color;
@@ -18,38 +24,4 @@ public class Color extends BaseEntity{
     @ManyToOne()
     @JoinColumn(name = "product_id")
     private Product product;
-
-    public Color(String color, String description, String url) {
-        this.color = color;
-        this.description = description;
-        this.url = url;
-    }
-
-    public Color() {
-
-    }
-
-    public String getColor() {
-        return color;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
 }

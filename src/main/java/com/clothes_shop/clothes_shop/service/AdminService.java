@@ -1,13 +1,15 @@
 package com.clothes_shop.clothes_shop.service;
 
-import com.clothes_shop.clothes_shop.common.CommonResponse;
 import com.clothes_shop.clothes_shop.domain.User;
-import com.clothes_shop.clothes_shop.dto.UserDto;
+import com.clothes_shop.clothes_shop.dto.UpdateUserDto;
+import com.clothes_shop.clothes_shop.dto.CreateUserDto;
 
 import java.util.List;
 
 public interface AdminService {
-    CommonResponse<List<User>> getUser();
-    User registerUser(UserDto dto);
-
+    List<User> getUsers();
+    User registerUser(CreateUserDto dto);
+    User updateUserInfo(int id, UpdateUserDto dto);
+    String deleteUserById(int id);
+    User getUserById(int id);
 }
