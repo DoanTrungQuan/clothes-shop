@@ -6,10 +6,16 @@ import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.OneToMany;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class ProductDto {
 
     @Nullable
@@ -19,10 +25,10 @@ public class ProductDto {
     private String description;
 
     @Nullable
-    private double price;
+    private Double price;
 
     @Nullable
-    private int quantity;
+    private Integer quantity;
 
     @Nullable
     private String urlPhoto;

@@ -8,7 +8,6 @@ import com.clothes_shop.clothes_shop.dto.CreateUserDto;
 import com.clothes_shop.clothes_shop.exception.BadRequestException;
 import com.clothes_shop.clothes_shop.exception.NotFoundException;
 import com.clothes_shop.clothes_shop.repository.UserRepository;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,11 +17,9 @@ import java.util.List;
 public class AdminServiceImp implements AdminService {
 
     private final UserRepository userRepository;
-    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public AdminServiceImp(UserRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
+    public AdminServiceImp(UserRepository userRepository) {
         this.userRepository = userRepository;
-        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
     @Override
@@ -38,7 +35,7 @@ public class AdminServiceImp implements AdminService {
             throw new BadRequestException(EError.USER_EXISTED);
         }
         User newUser = new User();
-        newUser.setPassword(bCryptPasswordEncoder.encode(createUserDto.getPassword()));
+        newUser.setPassword(createUserDto.getPassword());
         newUser.setUserName(createUserDto.getUserName());
         newUser.setEmail(createUserDto.getEmail());
         return userRepository.save(newUser);
@@ -46,7 +43,7 @@ public class AdminServiceImp implements AdminService {
 
     public User updateUserFromDto(User existedUser, UpdateUserDto dto) {
         if (dto.getPassword() != null) {
-            existedUser.setPassword(bCryptPasswordEncoder.encode(dto.getPassword()));
+            existedUser.setPassword(dto.getPassword());
         }
         if (dto.getEmail() != null) {
             existedUser.setEmail(dto.getEmail());
@@ -63,20 +60,19 @@ public class AdminServiceImp implements AdminService {
         if (dto.getPhoneNumber() != null) {
             existedUser.setPhoneNumber(dto.getPhoneNumber());
         }
-        return userRepository.save(existedUser);
+        return existedUser;
     }
 
     @Override
-    public User updateUserInfo(int id, UpdateUserDto dto) {
+    public User updateUser(int id, UpdateUserDto dto) {
         User existedUser = this.userRepository.findById(id);
         if (existedUser == null) {
             throw new NotFoundException(EError.USER_NOT_FOUND);
         }
-//        return new updateUserFromDto(existedUser, dto);
-        return existedUser;
+        existedUser = updateUserFromDto(existedUser, dto);
+        return this.userRepository.save(existedUser);
     }
 
-    @Transactional
     @Override
     public String deleteUserById(int id) {
         User existedUser = this.userRepository.findById(id);
@@ -84,7 +80,7 @@ public class AdminServiceImp implements AdminService {
             throw new NotFoundException(EError.USER_NOT_FOUND);
         }
         userRepository.delete(existedUser);
-        return "success";
+        return "User Deleted Successfully";
     }
 
     @Override

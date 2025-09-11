@@ -1,6 +1,7 @@
 package com.clothes_shop.clothes_shop.domain;
 
 import com.clothes_shop.clothes_shop.common.ERole;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Size;
@@ -36,6 +37,7 @@ public class User extends BaseEntity{
     private String phoneNumber;
 
     @Column(name = "date_of_birth", nullable = true)
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dateOfBirth;
 
     @Enumerated(EnumType.STRING)
