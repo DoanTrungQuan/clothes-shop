@@ -1,11 +1,11 @@
 package com.clothes_shop.clothes_shop.dto;
 
-public class UserDto {
+public class CreateUserDto {
     private String userName;
     private String password;
     private String email;
 
-    public UserDto(String userName, String password, String email) {
+    public CreateUserDto(String userName, String password, String email) {
         this.userName = userName;
         this.password = password;
         this.email = email;
