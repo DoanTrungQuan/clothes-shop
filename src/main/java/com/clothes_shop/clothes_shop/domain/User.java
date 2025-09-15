@@ -10,6 +10,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 @Table(name = "users")
 @Entity
@@ -44,5 +47,10 @@ public class User extends BaseEntity{
     @Column(nullable = true)
     private ERole role;
 
-
+    @ManyToMany()
+    @JoinTable(name = "users_products",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "product_id")
+    )
+    private List<Product> products = new ArrayList<>();
 }
