@@ -52,12 +52,6 @@ public class ProductServiceImp implements ProductService {
         if (dto.getPrice() !=null){
             existedProduct.setPrice(dto.getPrice());
         }
-        if (dto.getQuantity()!=null){
-            existedProduct.setQuantity(dto.getQuantity());
-        }
-        if (dto.getColors()!=null){
-            existedProduct.setColors(dto.getColors());
-        }
         return existedProduct;
     }
 
@@ -75,14 +69,12 @@ public class ProductServiceImp implements ProductService {
         if (existedProduct == null){
             throw new BadRequestException(EError.PRODUCT_EXISTED);
         }
-        Product newProduct = new Product(
-                dto.getName(),
-                dto.getDescription(),
-                dto.getPrice(),
-                dto.getQuantity(),
-                dto.getUrlPhoto(),
-                dto.getColors()
-        );
+        Product newProduct = new Product();
+        newProduct.setName(dto.getName());
+        newProduct.setUrlPhoto(dto.getUrlPhoto());
+        newProduct.setDescription(dto.getDescription());
+        newProduct.setPrice(dto.getPrice());
+        newProduct.setHashtagCategory(existedProduct.getHashtagCategory());
         return this.productRepository.save(newProduct);
     }
 }

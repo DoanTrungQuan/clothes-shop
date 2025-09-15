@@ -5,6 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "hashtag_categories")
 @Data
@@ -18,4 +21,7 @@ public class HashtagCategory extends BaseEntity{
     @ManyToOne()
     @JoinColumn(name = "categories_id")
     private Category category;
+
+    @OneToMany(mappedBy = "hashtagCategory", cascade = CascadeType.ALL,  fetch = FetchType.LAZY )
+    private List<Product> products = new ArrayList<>();
 }

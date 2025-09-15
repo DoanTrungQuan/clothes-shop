@@ -24,13 +24,21 @@ public class Product extends BaseEntity {
     private Double price;
 
     @Column(nullable = true)
-    private Integer quantity;
-
-    @Column(nullable = true)
     private String urlPhoto;
 
-    @Column(nullable = true)
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Color> colors = new ArrayList<Color>();
+    @ManyToOne()
+    @JoinColumn(name = "hashtag_categories_id")
+    private HashtagCategory hashtagCategory;
 
+    @Column(nullable = true)
+    private String size;
+
+    @Column(nullable = true)
+    private String productCode;
+
+    @Column(nullable = true)
+    private boolean isFavorite;
+
+    @ManyToMany(mappedBy = "products")
+    private List<User> users = new ArrayList<>();
 }

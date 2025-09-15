@@ -1,11 +1,8 @@
 package com.clothes_shop.clothes_shop.dto;
 
-import com.clothes_shop.clothes_shop.domain.Color;
+import com.clothes_shop.clothes_shop.domain.Category;
 import jakarta.annotation.Nullable;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.PositiveOrZero;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,16 +22,12 @@ public class ProductDto {
     private String description;
 
     @Nullable
+    @PositiveOrZero(message = "Price must be greater than or equals 0")
     private Double price;
-
-    @Nullable
-    private Integer quantity;
 
     @Nullable
     private String urlPhoto;
 
     @Nullable
-    private List<Color> colors = new ArrayList<Color>();
-
-
+    private String hashtagCategory;
 }
