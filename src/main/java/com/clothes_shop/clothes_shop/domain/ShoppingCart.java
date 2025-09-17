@@ -15,8 +15,10 @@ import java.util.List;
 @AllArgsConstructor
 @Table(name = "shopping_cart")
 public class ShoppingCart extends BaseEntity{
+    @Column(nullable = true)
     private Double price;
 
+    @Column(nullable = true)
     private Integer quantity;
 
     @ManyToMany()

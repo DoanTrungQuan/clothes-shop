@@ -1,6 +1,6 @@
 package com.clothes_shop.clothes_shop.domain;
 
-import com.clothes_shop.clothes_shop.common.ERole;
+import com.clothes_shop.clothes_shop.common.Role;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
@@ -12,7 +12,6 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 @Table(name = "users")
 @Entity
@@ -45,7 +44,7 @@ public class User extends BaseEntity{
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = true)
-    private ERole role;
+    private Role role;
 
     @ManyToMany()
     @JoinTable(name = "users_products",

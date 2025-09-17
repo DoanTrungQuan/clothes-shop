@@ -4,11 +4,9 @@ import com.clothes_shop.clothes_shop.domain.Category;
 import jakarta.annotation.Nullable;
 import jakarta.validation.constraints.PositiveOrZero;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -21,9 +19,8 @@ public class ProductDto {
     @Nullable
     private String description;
 
-    @Nullable
     @PositiveOrZero(message = "Price must be greater than or equals 0")
-    private Double price;
+    private double price;
 
     @Nullable
     private String urlPhoto;
