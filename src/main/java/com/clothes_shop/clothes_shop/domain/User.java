@@ -1,6 +1,6 @@
 package com.clothes_shop.clothes_shop.domain;
 
-import com.clothes_shop.clothes_shop.common.ERole;
+import com.clothes_shop.clothes_shop.common.Role;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
@@ -12,7 +12,6 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 @Table(name = "users")
 @Entity
@@ -21,7 +20,7 @@ import java.util.Set;
 @Data
 public class User extends BaseEntity{
 
-    @Column(unique = true, nullable = true, length = 50)
+    @Column(nullable = true, length = 50)
     @Size(min = 3, max = 50, message = "Username must be between 3-50 characters")
     private String userName;
 
@@ -45,12 +44,11 @@ public class User extends BaseEntity{
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = true)
-    private ERole role;
+    private Role role;
 
-    @ManyToMany()
-    @JoinTable(name = "users_products",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "product_id")
-    )
-    private List<Product> products = new ArrayList<>();
+    @OneToMany(mappedBy = "user")
+    private List<Order>  orders = new ArrayList<>();
+
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private ShoppingCart cart;
 }

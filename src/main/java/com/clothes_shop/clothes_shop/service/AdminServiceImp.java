@@ -1,7 +1,6 @@
 package com.clothes_shop.clothes_shop.service;
 
-import com.clothes_shop.clothes_shop.common.EError;
-import com.clothes_shop.clothes_shop.common.HttpsCode;
+import com.clothes_shop.clothes_shop.common.Error;
 import com.clothes_shop.clothes_shop.domain.User;
 import com.clothes_shop.clothes_shop.dto.UpdateUserDto;
 import com.clothes_shop.clothes_shop.dto.CreateUserDto;
@@ -9,7 +8,6 @@ import com.clothes_shop.clothes_shop.exception.BadRequestException;
 import com.clothes_shop.clothes_shop.exception.NotFoundException;
 import com.clothes_shop.clothes_shop.repository.UserRepository;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -32,7 +30,7 @@ public class AdminServiceImp implements AdminService {
     public User registerUser(CreateUserDto createUserDto) {
         User existUser = this.userRepository.findByUserName(createUserDto.getUserName());
         if (existUser != null) {
-            throw new BadRequestException(EError.USER_EXISTED);
+            throw new BadRequestException(Error.USER_EXISTED);
         }
         User newUser = new User();
         newUser.setPassword(createUserDto.getPassword());
@@ -67,7 +65,7 @@ public class AdminServiceImp implements AdminService {
     public User updateUser(int id, UpdateUserDto dto) {
         User existedUser = this.userRepository.findById(id);
         if (existedUser == null) {
-            throw new NotFoundException(EError.USER_NOT_FOUND);
+            throw new NotFoundException(Error.USER_NOT_FOUND);
         }
         existedUser = updateUserFromDto(existedUser, dto);
         return this.userRepository.save(existedUser);
@@ -77,7 +75,7 @@ public class AdminServiceImp implements AdminService {
     public String deleteUserById(int id) {
         User existedUser = this.userRepository.findById(id);
         if (existedUser == null) {
-            throw new NotFoundException(EError.USER_NOT_FOUND);
+            throw new NotFoundException(Error.USER_NOT_FOUND);
         }
         userRepository.delete(existedUser);
         return "User Deleted Successfully";
@@ -87,7 +85,7 @@ public class AdminServiceImp implements AdminService {
     public User getUserById(int id) {
         User existedUser = this.userRepository.findById(id);
         if (existedUser == null) {
-            throw new NotFoundException(EError.USER_NOT_FOUND);
+            throw new NotFoundException(Error.USER_NOT_FOUND);
         }
         return existedUser;
     }

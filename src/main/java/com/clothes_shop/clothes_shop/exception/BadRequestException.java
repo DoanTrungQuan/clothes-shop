@@ -1,13 +1,13 @@
 package com.clothes_shop.clothes_shop.exception;
-import com.clothes_shop.clothes_shop.common.EError;
+import com.clothes_shop.clothes_shop.common.Error;
 
 public class BadRequestException extends RuntimeException {
-    private final EError error;
-    public BadRequestException(EError error) {
+    private final Error error;
+    public BadRequestException(Error error) {
         super(error.getMessage());
         this.error = error;
     }
-    public EError getError() {
+    public Error getError() {
         return error;
     }
 }

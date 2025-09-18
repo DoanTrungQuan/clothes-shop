@@ -1,6 +1,6 @@
 package com.clothes_shop.clothes_shop.service;
 
-import com.clothes_shop.clothes_shop.common.EError;
+import com.clothes_shop.clothes_shop.common.Error;
 import com.clothes_shop.clothes_shop.domain.Product;
 import com.clothes_shop.clothes_shop.dto.ProductDto;
 import com.clothes_shop.clothes_shop.exception.BadRequestException;
@@ -21,7 +21,7 @@ public class ProductServiceImp implements ProductService {
     @Override
     public Product getProductById(int id) {
         Product product = this.productRepository.findById(id)
-                .orElseThrow(()-> new NotFoundException(EError.PRODUCT_NOT_FOUND));
+                .orElseThrow(()-> new NotFoundException(Error.PRODUCT_NOT_FOUND));
         return product;
     }
 
@@ -34,7 +34,7 @@ public class ProductServiceImp implements ProductService {
     @Override
     public String deleteProduct(int id) {
         Product product = this.productRepository.findById(id)
-                .orElseThrow(()-> new NotFoundException(EError.PRODUCT_NOT_FOUND));
+                .orElseThrow(()-> new NotFoundException(Error.PRODUCT_NOT_FOUND));
         this.productRepository.delete(product);
         return "Product has been deleted";
     }
@@ -49,7 +49,7 @@ public class ProductServiceImp implements ProductService {
         if (dto.getDescription()!=null) {
             existedProduct.setDescription(dto.getDescription());
         }
-        if (dto.getPrice() !=null){
+        if (dto.getPrice() !=0){
             existedProduct.setPrice(dto.getPrice());
         }
         return existedProduct;
@@ -58,7 +58,7 @@ public class ProductServiceImp implements ProductService {
     @Override
     public Product updateProduct(int id, ProductDto dto) {
         Product existedProduct = this.productRepository.findById(id)
-                .orElseThrow(()-> new NotFoundException(EError.PRODUCT_NOT_FOUND));
+                .orElseThrow(()-> new NotFoundException(Error.PRODUCT_NOT_FOUND));
         existedProduct = updateProductFromDto(existedProduct, dto);
         return this.productRepository.save(existedProduct);
     }
@@ -67,7 +67,7 @@ public class ProductServiceImp implements ProductService {
     public Product addProduct(ProductDto dto) {
         Product existedProduct = this.productRepository.findByName(dto.getName());
         if (existedProduct == null){
-            throw new BadRequestException(EError.PRODUCT_EXISTED);
+            throw new BadRequestException(Error.PRODUCT_EXISTED);
         }
         Product newProduct = new Product();
         newProduct.setName(dto.getName());
