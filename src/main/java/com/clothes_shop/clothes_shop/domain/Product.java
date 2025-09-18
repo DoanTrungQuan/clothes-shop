@@ -33,16 +33,10 @@ public class Product extends BaseEntity {
     private HashtagCategory hashtagCategory;
 
     @Column(nullable = true)
-    private String size;
-
-    @Column(nullable = true)
     private String productCode;
 
     @Column(nullable = true)
     private boolean isFavorite;
-
-    @ManyToMany(mappedBy = "products")
-    private List<User> users = new ArrayList<>();
 
     @OneToMany(mappedBy = "product")
     private Set<Order> orders = new HashSet<>();

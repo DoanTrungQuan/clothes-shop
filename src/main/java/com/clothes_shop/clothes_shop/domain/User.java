@@ -20,7 +20,7 @@ import java.util.List;
 @Data
 public class User extends BaseEntity{
 
-    @Column(unique = true, nullable = true, length = 50)
+    @Column(nullable = true, length = 50)
     @Size(min = 3, max = 50, message = "Username must be between 3-50 characters")
     private String userName;
 
@@ -46,10 +46,9 @@ public class User extends BaseEntity{
     @Column(nullable = true)
     private Role role;
 
-    @ManyToMany()
-    @JoinTable(name = "users_products",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "product_id")
-    )
-    private List<Product> products = new ArrayList<>();
+    @OneToMany(mappedBy = "user")
+    private List<Order>  orders = new ArrayList<>();
+
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private ShoppingCart cart;
 }

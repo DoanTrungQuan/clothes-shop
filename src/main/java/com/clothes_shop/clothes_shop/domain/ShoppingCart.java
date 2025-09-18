@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,20 +14,11 @@ import java.util.List;
 @AllArgsConstructor
 @Table(name = "shopping_cart")
 public class ShoppingCart extends BaseEntity{
-    @Column(nullable = true)
-    private Double price;
 
-    @Column(nullable = true)
-    private Integer quantity;
+    @OneToMany(mappedBy = "cart")
+    private List<Order>  orders = new ArrayList<>();
 
-    @ManyToMany()
-    @JoinTable(name = "products_carts",
-            joinColumns = @JoinColumn(name = "shopping_cart_id"),
-            inverseJoinColumns = @JoinColumn(name = "product_id")
-    )
-    private List<Product>  products = new ArrayList<>();
-
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY )
+    @OneToOne()
     @JoinColumn(name = "user_id")
     private User user;
 }
