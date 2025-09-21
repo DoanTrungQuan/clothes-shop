@@ -16,7 +16,7 @@ import java.util.List;
 public class Category extends BaseEntity{
 
     @Column()
-    private String categoryName;
+    private String name;
 
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL,  fetch = FetchType.LAZY)
     private List<HashtagCategory> hashtagCategories = new ArrayList<>();

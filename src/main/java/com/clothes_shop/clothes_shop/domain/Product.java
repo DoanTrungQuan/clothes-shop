@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.NaturalId;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -32,13 +33,15 @@ public class Product extends BaseEntity {
     @JoinColumn(name = "hashtag_categories_id")
     private HashtagCategory hashtagCategory;
 
-    @Column(nullable = true)
+    @Column(name = "product_code", nullable = true)
     private String productCode;
 
-    @Column(nullable = true)
+    @Transient
     private boolean isFavorite;
 
     @OneToMany(mappedBy = "product")
     private Set<Order> orders = new HashSet<>();
 
+    @OneToMany(mappedBy = "product")
+    private List<ShoppingCart> carts = new ArrayList<>();
 }

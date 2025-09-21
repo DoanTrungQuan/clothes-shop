@@ -15,10 +15,20 @@ import java.util.List;
 @Table(name = "shopping_cart")
 public class ShoppingCart extends BaseEntity{
 
-    @OneToMany(mappedBy = "cart")
-    private List<Order>  orders = new ArrayList<>();
+    @Column
+    private int quantity;
 
-    @OneToOne()
+    @Column
+    private String size;
+
+    @Column
+    private int price;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "product_id")
+    private Product product;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 }

@@ -4,9 +4,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.clothes_shop.clothes_shop.domain.User;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
-public interface UserRepository extends JpaRepository<User, Integer> {
-    User findByUserName(String userName);
-    User findById(int id);
-    User findByEmail(String email);
+public interface UserRepository extends JpaRepository<User, Long> {
+    Optional<User> findByUserName(String userName);
 }
