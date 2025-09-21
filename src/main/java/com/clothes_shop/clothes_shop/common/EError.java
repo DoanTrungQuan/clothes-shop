@@ -6,7 +6,9 @@ public enum EError {
     PRODUCT_NOT_FOUND("Product not found"),
     PRODUCT_EXISTED("Product already exists"),
     HASHTAG_CATEGORY_NOT_FOUND("Hashtag category not found"),
-    HASHTAG_CATEGORY_EXISTED("Hashtag category already exists");
+    HASHTAG_CATEGORY_EXISTED("Hashtag category already exists"),
+    CATEGORY_NOT_FOUND("Category not found"),
+    CATEGORY_EXISTED("Category already exists");
     private final String message;
 
     EError(String message) {
