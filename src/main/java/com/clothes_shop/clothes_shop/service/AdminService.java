@@ -9,7 +9,7 @@ import java.util.List;
 public interface AdminService {
     List<User> getUsers();
     User registerUser(CreateUserDto dto);
-    User updateUser(int id, UpdateUserDto dto);
-    String deleteUserById(int id);
-    User getUserById(int id);
+    User updateUser(Long id, UpdateUserDto dto);
+    String deleteUserById(Long id);
+    User getUserById(Long id);
 }

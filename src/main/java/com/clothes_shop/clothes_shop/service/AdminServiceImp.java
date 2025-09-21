@@ -1,6 +1,6 @@
 package com.clothes_shop.clothes_shop.service;
 
-import com.clothes_shop.clothes_shop.common.Error;
+import com.clothes_shop.clothes_shop.common.EError;
 import com.clothes_shop.clothes_shop.domain.User;
 import com.clothes_shop.clothes_shop.dto.UpdateUserDto;
 import com.clothes_shop.clothes_shop.dto.CreateUserDto;
@@ -28,10 +28,8 @@ public class AdminServiceImp implements AdminService {
 
     @Override
     public User registerUser(CreateUserDto createUserDto) {
-        User existUser = this.userRepository.findByUserName(createUserDto.getUserName());
-        if (existUser != null) {
-            throw new BadRequestException(Error.USER_EXISTED);
-        }
+        User existUser = this.userRepository.findByUserName(createUserDto.getUserName())
+                .orElseThrow(()-> new NotFoundException(EError.USER_NOT_FOUND));
         User newUser = new User();
         newUser.setPassword(createUserDto.getPassword());
         newUser.setUserName(createUserDto.getUserName());
@@ -62,33 +60,26 @@ public class AdminServiceImp implements AdminService {
     }
 
     @Override
-    public User updateUser(int id, UpdateUserDto dto) {
-        User existedUser = this.userRepository.findById(id);
-        if (existedUser == null) {
-            throw new NotFoundException(Error.USER_NOT_FOUND);
-        }
+    public User updateUser(Long id, UpdateUserDto dto) {
+        User existedUser = this.userRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException(EError.USER_NOT_FOUND));
         existedUser = updateUserFromDto(existedUser, dto);
         return this.userRepository.save(existedUser);
     }
 
     @Override
-    public String deleteUserById(int id) {
-        User existedUser = this.userRepository.findById(id);
-        if (existedUser == null) {
-            throw new NotFoundException(Error.USER_NOT_FOUND);
-        }
+    public String deleteUserById(Long id) {
+        User existedUser = userRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException(EError.USER_NOT_FOUND));
         userRepository.delete(existedUser);
         return "User Deleted Successfully";
     }
 
     @Override
-    public User getUserById(int id) {
-        User existedUser = this.userRepository.findById(id);
-        if (existedUser == null) {
-            throw new NotFoundException(Error.USER_NOT_FOUND);
-        }
+    public User getUserById(Long id) {
+        User existedUser = this.userRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException(EError.USER_NOT_FOUND));
         return existedUser;
     }
-
 
 }

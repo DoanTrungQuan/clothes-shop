@@ -27,4 +27,7 @@ public class ProductDto {
 
     @Nullable
     private String hashtagCategory;
+
+    @Nullable
+    private String productCode;
 }

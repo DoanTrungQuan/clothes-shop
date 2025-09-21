@@ -49,6 +49,6 @@ public class User extends BaseEntity{
     @OneToMany(mappedBy = "user")
     private List<Order>  orders = new ArrayList<>();
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private ShoppingCart cart;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<ShoppingCart> carts = new ArrayList<>();
 }

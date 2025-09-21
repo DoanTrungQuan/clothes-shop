@@ -41,8 +41,4 @@ public class Order extends BaseEntity{
     @ManyToOne()
     @JoinColumn(name = "user_id")
     private User user;
-
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "cart_id")
-    private ShoppingCart cart;
 }

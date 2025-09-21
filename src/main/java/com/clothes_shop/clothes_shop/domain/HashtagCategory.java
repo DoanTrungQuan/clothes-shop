@@ -16,7 +16,7 @@ import java.util.List;
 public class HashtagCategory extends BaseEntity{
 
     @Column()
-    private String hashtagCategory;
+    private String name;
 
     @ManyToOne()
     @JoinColumn(name = "categories_id")
