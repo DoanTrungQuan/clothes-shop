@@ -2,11 +2,14 @@ package com.clothes_shop.clothes_shop.service;
 
 import com.clothes_shop.clothes_shop.common.EError;
 import com.clothes_shop.clothes_shop.domain.Category;
+import com.clothes_shop.clothes_shop.dto.CategoryDto;
+import com.clothes_shop.clothes_shop.exception.BadRequestException;
 import com.clothes_shop.clothes_shop.exception.NotFoundException;
 import com.clothes_shop.clothes_shop.repository.CategoryRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CategoryServiceImp implements CategoryService {
@@ -37,22 +40,34 @@ public class CategoryServiceImp implements CategoryService {
     }
 
     @Override
-    public Category createCategory(Category category) {
-        return null;
+    public Category createCategory(CategoryDto dto) {
+        Optional<Category> category = this.categoryRepository.findByName(dto.getName());
+        if (category.isPresent()) {
+            throw new BadRequestException(EError.CATEGORY_EXISTED);
+        }
+        Category newCategory = new Category();
+        newCategory.setName(dto.getName());
+        return this.categoryRepository.save(newCategory);
     }
 
     @Override
-    public Category updateCategory(Category category) {
-        return null;
+    public Category updateCategoryById(Long id, CategoryDto dto) {
+        Category category = this.getCategoryById(id);
+        category.setName(dto.getName());
+        return this.categoryRepository.save(category);
     }
 
     @Override
     public String deleteCategoryById(Long id) {
-        return "";
+        Category category = this.getCategoryById(id);
+        this.categoryRepository.delete(category);
+        return "Successfully deleted";
     }
 
     @Override
     public String deleteCategoryByName(String name) {
-        return "";
+        Category category = this.getCategoryByName(name);
+        this.categoryRepository.delete(category);
+        return "Successfully deleted";
     }
 }
