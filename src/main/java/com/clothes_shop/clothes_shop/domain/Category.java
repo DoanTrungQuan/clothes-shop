@@ -15,7 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 public class Category extends BaseEntity{
 
-    @Column()
+    @Column(name = "name")
     private String name;
 
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL,  fetch = FetchType.LAZY)

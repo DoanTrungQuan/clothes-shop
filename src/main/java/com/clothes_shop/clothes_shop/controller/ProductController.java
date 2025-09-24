@@ -4,6 +4,7 @@ import com.clothes_shop.clothes_shop.domain.Product;
 import com.clothes_shop.clothes_shop.dto.ProductDto;
 import com.clothes_shop.clothes_shop.service.ProductService;
 import jakarta.persistence.criteria.CriteriaBuilder;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
